@@ -1,14 +1,13 @@
 const Task = require("../Models/taskmodel");
+const { message } = require("statuses");
 
 // creating a new task POST/api/task
 const createTask = async (req, res) => {
   try {
-    const { title, description } = req.body;
+    const { title, description, subtitle, Author } = req.body;
 
-    if (!title || !description) {
-      return res
-        .status(400)
-        .json({ message: "The Task has not been created..." });
+    if (!title || !description || !subtitle || !Author) {
+      return res.status(400).json({ message: "Task created..." });
     }
 
     const task = new Task({ title, description, subtitle, Author });
