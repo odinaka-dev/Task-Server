@@ -1,13 +1,14 @@
 const Task = require("../Models/taskmodel");
-const { message } = require("statuses");
 
-// creating a new task POST/api/task
+// Creating a new task POST/api/tasks
 const createTask = async (req, res) => {
   try {
     const { title, description, subtitle, author } = req.body;
 
-    if (!title || !description || !subtitle || !author) {
-      return res.status(400).json({ message: "Task not created..." });
+    if (!title || !description || !author) {
+      return res
+        .status(400)
+        .json({ message: "Title, description, and author are required." });
     }
 
     const task = new Task({ title, description, subtitle, author });
@@ -15,58 +16,59 @@ const createTask = async (req, res) => {
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({
-      message:
-        "Error creating the task the server does not recognize this action...",
-      error,
+      message: "Error creating the task.",
+      error: error.message,
     });
   }
 };
 
-// fetching the task data to the frontend GET/api/task
-const getTask = async (res, req) => {
+// Fetching all tasks GET/api/tasks
+const getTask = async (req, res) => {
   try {
     const tasks = await Task.find();
     res.status(200).json(tasks);
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error fetching task from the server", error });
+      .json({ message: "Error fetching tasks.", error: error.message });
   }
 };
 
-// updating the task data from the frontend into the backend PUT/api/:id
+// Updating a task by ID PUT/api/tasks/:id
 const updateTask = async (req, res) => {
   try {
     const { title, description, subtitle, author } = req.body;
     const task = await Task.findByIdAndUpdate(
       req.params.id,
-      { title, description, subtitle, author },
-      { new: true }
+      { title, subtitle, description, author },
+      { new: true, runValidators: true }
     );
 
-    if (!task)
-      return res
-        .status(404)
-        .json({ message: "Task not found, update can't take place" });
+    if (!task) {
+      return res.status(404).json({ message: "Task not found." });
+    }
 
     res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({ message: "Server failed to update task", error });
+    res
+      .status(500)
+      .json({ message: "Error updating task.", error: error.message });
   }
 };
 
-// deleting task from DELETE/api/:id
+// Deleting a task DELETE/api/tasks/:id
 const deleteTask = async (req, res) => {
   try {
     const task = await Task.findByIdAndDelete(req.params.id);
-    if (!task)
-      return res
-        .status(404)
-        .json({ message: "Task to delete cannot be found" });
+    if (!task) {
+      return res.status(404).json({ message: "Task not found." });
+    }
 
-    res.status(200).json({ message: "Task has been deleted successflly" });
+    res.status(200).json({ message: "Task deleted successfully." });
   } catch (error) {
-    res.status(500).json({ message: "Error", error });
+    res
+      .status(500)
+      .json({ message: "Error deleting task.", error: error.message });
   }
 };
 
