@@ -23,5 +23,5 @@ connectDB();
 const PORT = process.env.PORT || 3000;
 
 app.listen(3000, () => {
-  console.log(`the server is running at https://localhost:${PORT}`);
+  console.log(`the server is running at http://localhost:${PORT}`);
 });

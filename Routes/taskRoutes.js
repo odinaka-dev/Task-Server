@@ -1,5 +1,4 @@
 const express = require("express");
-
 const {
   createTask,
   getTask,
@@ -9,9 +8,9 @@ const {
 
 const router = express.Router();
 
-router.post("/tasks", createTask);
-router.get("/tasks", getTask);
-router.put("/tasks/:id", updateTask);
-router.delete("/tasks/:id", deleteTask);
+router.post("tasks", createTask);
+router.get("tasks", getTask);
+router.put("task/:id", updateTask);
+router.delete("task/:id", deleteTask);
 
 module.exports = router;

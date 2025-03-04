@@ -4,13 +4,13 @@ const { message } = require("statuses");
 // creating a new task POST/api/task
 const createTask = async (req, res) => {
   try {
-    const { title, description, subtitle, Author } = req.body;
+    const { title, description, subtitle, author } = req.body;
 
-    if (!title || !description || !subtitle || !Author) {
-      return res.status(400).json({ message: "Task created..." });
+    if (!title || !description || !subtitle || !author) {
+      return res.status(400).json({ message: "Task not created..." });
     }
 
-    const task = new Task({ title, description, subtitle, Author });
+    const task = new Task({ title, description, subtitle, author });
     await task.save();
     res.status(201).json(task);
   } catch (error) {
@@ -37,10 +37,10 @@ const getTask = async (res, req) => {
 // updating the task data from the frontend into the backend PUT/api/:id
 const updateTask = async (req, res) => {
   try {
-    const { title, description, subtitle, Author } = req.body;
+    const { title, description, subtitle, author } = req.body;
     const task = await Task.findByIdAndUpdate(
       req.params.id,
-      { title, description, subtitle, Author },
+      { title, description, subtitle, author },
       { new: true }
     );
 
