@@ -1,45 +1,73 @@
-# Task Creator - Backend.
+# Task Creator - Backend
 
-A simpl backend web application that handles the creation, update, fetch and delete of task of a website.
+A simple backend web application that handles task creation, updating, fetching, and deletion.
 
 ## Features
 
-- Create Task
-- Fetch task (to be displayed in the frontend)
-- Edit and update existing task from the frontend to the backend
-- Delete task
+- **Create a Task** - Add new tasks to the database.
+- **Fetch Tasks** - Retrieve all tasks to be displayed in the frontend.
+- **Update Tasks** - Edit and update existing tasks.
+- **Delete Tasks** - Remove tasks from the database.
 
 ## Technologies Used
 
-- Nodejs
-- Expressjs
-- MongoDB (Database)
-- Nodemon
+- **Node.js** - Backend runtime environment.
+- **Express.js** - Web framework for building APIs.
+- **MongoDB** - NoSQL database for storing tasks.
+- **Mongoose** - ODM for MongoDB.
+- **Cors** - Middleware for handling cross-origin requests.
+- **Body-parser** - Middleware for parsing request bodies.
+- **Morgan** - Logging middleware.
+- **Dotenv** - Environment variable management.
+- **Nodemon** - Development tool for automatic server restarts.
 
 ## Setup Instructions
 
-### 1. Clone the Repository
+### 1. Clone and Install Dependencies
+
+```sh
+git clone https://github.com/odinaka-dev/Task-Server.git
+cd Task-Server
+npm install
 
 ```
-git clone (https://github.com/odinaka-dev/movieplace.git)
-cd project
-npm install (To install necessary dependencies and the likes)
-```
 
-### 2. Installed Necessary Dependencies (most important Nodejs for development)
+### 2. Configure variable environments
 
-### 3. Got a Free use OMDb API Key (1000 request limit per day)
+PORT=3000
+MONGO_URI=your_mongodb_connection_string (located in the .env file)
+nodemon index.js # Run with Nodemon for development
 
-- (https://www.omdbapi.com/)
+### 3. API Endpoints
 
-### 4. Vercel (Deployed the frontend view code from github to vercel)
+json sample
+{
+"title": "practice task",
+"description": "This is a sample task created for practice purpose",
+"subtitle": "Optional",
+"author": "John becky"
+}
 
-- live website link (https://movieplace-steel.vercel.app/)
+- Create Task
+  method: POST
+  http://localhost:3000/api/tasks
+
+- Fetch All Tasks
+  Method: GET
+  http://localhost:3000/api/tasks
+
+-Update Task
+Method: PUT
+http://localhost:3000/api/tasks/:id
+
+-Delete Task
+Method: DELETE
+http://localhost:3000/api/tasks/:id
 
 ## License
 
-This project is free to use.
+##########################
 
 ---
 
-Enjoy searching for movies on MoviePlace! 🎬🍿
+use the following endpoints to create a simple yet versatile Task app.
