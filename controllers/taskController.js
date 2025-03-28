@@ -21,14 +21,6 @@ const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
 
-    // Append full URL to the image path
-    const updatedTasks = tasks.map((task) => ({
-      ...task._doc,
-      image: task.image
-        ? `${req.protocol}://${req.get("host")}${task.image}`
-        : null,
-    }));
-
     res.status(200).json(updatedTasks);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
