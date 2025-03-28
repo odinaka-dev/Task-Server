@@ -21,7 +21,7 @@ const getTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
 
-    res.status(200).json(updatedTasks);
+    res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json({ message: "Server Error", error });
   }
